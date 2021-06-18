@@ -1,0 +1,41 @@
+﻿@model CalorieProject_V01.Models.FoodItem
+@*using CalorieProject_V01.Models*@
+
+@{
+    ViewBag.Title = "AddCalories";
+}
+<div class="container-fluid">
+    <h2>@Html.DisplayFor(model => model.Calories) Calories added to your total</h2>
+    <h3>Your Total Calories: @ViewBag.TotalCalories </h3>
+
+    <div>
+    
+        <dl class="dl-horizontal">
+            <dt>
+
+                @Html.DisplayNameFor(model => model.Category.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ItemName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+
+        @*Html.ActionLink("Back to List", "Index")*@
+
+        <a href="@Url.Action("Index", "Home")" class="btn btn-default btn-lg">
+            Back to Menu
+        </a>
+    </p>
+</div>

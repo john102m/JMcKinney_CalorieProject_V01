@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <title>Calorie Counts</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="calorie control">
+    <meta name="keywords" content="weight loss app">
+
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="height:100%" class="bg-3">
+    <div class="jumbotron  bg-3 text-center">
+        <h1 class="display-4">Calorie Counts</h1>
+        
+        <hr class="my-4">
+        <p>Welcome to the Calorie Counting App to help track your daily intake</p>
+        <div class="container-fluid bg-4 text-center">
+            @Html.ActionLink("Click to Enter", "Index", "Home", new { @class = "margin" })
+            
+        </div>
+        <br />
+        <img class="img-rounded" src="~/Images/fork-snip.png" />
+
+    </div>
+
+
+</body>
+

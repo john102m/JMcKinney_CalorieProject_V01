@@ -1,0 +1,56 @@
+﻿@model CalorieProject_V01.Models.FoodItem
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container-fluid">
+    <h2>@Html.DisplayFor(model => model.ItemName)</h2>
+    <div class="row">
+
+        <div class="col-sm-6 text-justify">
+
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Calories)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Calories)
+                </dd>
+
+            </dl>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            @{
+                var img = "~/Images/" + Model.ItemName + ".png";
+                var img2 = "~/Images/" + Model.ImgFilePath;
+            }
+
+            <img src=@Url.Content(img2) class="img-rounded img-responsive" style="width:80px;height:80px;" alt="Image" />
+
+        </div>
+
+
+    </div>
+    <br />
+    <p>
+        @*Html.ActionLink("Back", "ShowCategoryItems", new { id = @Model.CategoryId })*@
+
+
+        <a href="@Url.Action("ListItems", "Admin", new { id = @Model.CategoryId })" class="btn btn-default btn-lg">
+            Back
+        </a>
+    </p>
+ </div> 

@@ -1,0 +1,81 @@
+﻿@model CalorieProject_V01.Models.FoodItem
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="container-fluid">
+    <h2>Create New Food Item</h2>
+
+    <a href="@Url.Action("ManageItems", "Admin")" class="btn btn-default btn-lg">
+        Back
+    </a>
+    @*using (Html.BeginForm())
+        {*@
+    @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Calories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Calories, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Calories, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImgFilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @*here is javascript to enable the upload button to fit in with colour scheme*@
+                    @*see myBundle/myscript.js , the input element is hidden*@
+                  
+                    @Html.TextBoxFor(model => model.ImgFilePath, new { type = "file", id = "FileEditBox", @class = "hidden" })
+
+                    <label for="FileEditBox" class="btn btn-default btn-lg">Choose File</label>
+                    <!-- name of file chosen -->
+                    <span id="fBox">No file chosen</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default btn-lg" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@*add this extra bit of js to the project*@
+@Scripts.Render("~/bundles/mybundle")

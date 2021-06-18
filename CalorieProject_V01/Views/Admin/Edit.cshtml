@@ -1,0 +1,96 @@
+﻿@model CalorieProject_V01.Models.FoodItem
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="container-fluid">
+    <h2>Edit Item</h2>
+
+
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="@Url.Action("ListItems", "Admin", new { id = @Model.CategoryId })" class="btn btn-default btn-lg">
+                Back
+            </a>
+        </div>
+        <div class="col-sm-4">
+            @{
+                
+                var img = "~/Images/" + Model.ImgFilePath;
+            }
+            <br />
+            <img src=@Url.Content(img) class="img-rounded img-responsive" style="width:100px;height:100px;" alt="Image" />
+        </div>
+    </div>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ItemId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Calories, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Calories, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Calories, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImgFilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.TextBoxFor(model => model.ImgFilePath, new { type = "file", id = "FileEditBox", @class = "hidden" })
+
+            <label for="FileEditBox" class="btn btn-default btn-lg">Choose File</label>
+            <!-- name of file chosen -->
+            <span id="fBox">No file chosen</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default btn-lg" />
+        </div>
+    </div>
+</div>
+    }
+
+    <div>
+
+
+    </div>
+</div>
+@Scripts.Render("~/bundles/mybundle")

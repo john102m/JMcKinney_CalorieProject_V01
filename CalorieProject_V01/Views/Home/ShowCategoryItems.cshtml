@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CalorieProject_V01.Models.FoodItem>
+
+@{
+    ViewBag.Title = ViewBag.Category;
+}
+
+<div class="container-fluid">
+
+    <h2>@ViewBag.Category</h2>
+    
+    <br />
+    <table class="table">
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>             
+
+                @{
+                    
+                    var img = "~/Images/" + item.ImgFilePath;
+
+                }
+            <td>
+                <a href="@Url.Action("Details", "Home", new { id = item.ItemId })">
+                    <img src=@Url.Content(img) class="img-rounded img-responsive" style="max-height:128px" alt="Image" />
+                </a>
+            </td>
+
+
+                <td>
+
+                    @if (User.IsInRole("Member"))
+                    {
+                        <a href="@Url.Action("AddCalories", "Home", new { id = item.ItemId })" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add
+                        </a>
+                    }
+                    <a href="@Url.Action("Details", "Home", new { id = item.ItemId })" class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-list"></span>&nbsp;Details
+                    </a>
+
+
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div>
+
+        <a href="@Url.Action("Index", "Home")" class="btn btn-default btn-lg">
+            Back
+        </a>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CalorieProject_V01.Models.Message>
+
+@{
+    ViewBag.Title = "ShowMessages";
+}
+<div class="container-fluid">
+    <h2>Messages</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MessagePost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePosted)
+            </th>
+            <th>
+                Sub?
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MessagePost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatePosted)
+                </td>
+                <td>
+                    @if (item.Subscribe == true)
+                    {
+                        @Html.Raw("YES")
+                    }
+                    else
+                    {
+                        @Html.Raw("NO")
+                    }
+                </td>
+                <td>
+
+                    @Html.ActionLink("Delete", "DeleteMessage", new { id = item.MessageId }, new { @class = "btn btn-default btn-lg" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <a href="@Url.Action("ManageItems", "Admin")" class="btn btn-default btn-lg">
+        Back
+    </a>
+</div>

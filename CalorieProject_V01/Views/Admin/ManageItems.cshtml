@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CalorieProject_V01.Models.Category>
+
+@{
+    ViewBag.Title = "Manage Items";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-7">
+            <h2>Manage Food Items</h2>
+        </div>
+        <div class="col-sm-4">
+            <br/>
+            <p>
+                @*Html.ActionLink("Create New Item", "Create")*@
+                <a href="@Url.Action("Create", "Admin")" class="btn btn-default btn-lg">
+                    Create New
+                </a>
+            </p>
+        </div>
+
+    </div>
+    <br />
+
+    <table class="table">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.Name)*@
+                    <a href="@Url.Action("ListItems", "Admin", new { id = item.CategoryId })" class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-list"></span> @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+
+
+                @*Html.ActionLink("List", "ListItems", new { id = item.CategoryId })*@
+
+
+                @{
+                    var img = "~/Images/" + item.Name + ".png";
+                    var img2 = "~/Images/" + item.ImgFilePath;
+                }
+                <td>
+
+                    <img src=@Url.Content(img2) class="img-rounded img-responsive" style="width:100px;height:100px;" alt="Image" />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,38 @@
+﻿@model CalorieProject_V01.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Daily Total";
+}
+<div class="container-fluid">
+    <h2>Daily Total Calories for  @Html.DisplayFor(model => model.UserName)</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            <div class="row">
+
+                <div class="col-sm-2" style="display:inline-block">
+                    <h1>Total: @Model.TotalCalories&nbspkcal</h1>
+                </div>
+
+                <div class="col-sm-6">
+                    <br />
+                    <input type="submit" value="Reset" class="btn btn-default btn-lg" />
+                </div>
+                <br />
+
+            </div>
+        </div>
+    }
+    <br />
+
+    <div>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-default btn-lg">
+            Back to Menu
+        </a>
+    </div>
+
+
+</div>

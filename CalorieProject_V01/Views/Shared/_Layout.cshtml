@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNet.Identity
+@using CalorieProject_V01.Models
+@using Microsoft.AspNet.Identity.EntityFramework;
+
+
+@***************************************************************************************@
+@*some kind of hack to get user data into the shared layout view   ??*@
+@{ 
+    int calories = 0;
+}
+@if (Request.IsAuthenticated)
+{ 
+    // problems arise here if you make changes to the program and don't log out - ask Dana
+    CalorieDbContext context = new CalorieDbContext();
+    UserManager<User> userManager = new UserManager<User>(new UserStore<User>(context));
+    User user = userManager.FindByName(User.Identity.Name);
+    calories = user.TotalCalories;
+}
+@**************************************************************************************@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="calorie control">
+    <meta name="keywords" content="fat">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <title>@ViewBag.Title - Calories Count</title>
+
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body>
+    <div class="navbar navbar-default bg-3">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+
+                </button>
+
+
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+
+                    <img src="~/Images/fork-snip.png" class="img-circle img-responsive" style="width:50px;height:50px;margin:0px;" />
+                </a>
+
+                @if (User.IsInRole("Member"))
+                {
+                    <span class="nav-item info-box">
+                        @User.Identity.GetUserName(), @calories kcal
+                    </span>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <span class="nav-item info-box">
+                        @User.Identity.GetUserName()
+                    </span>
+                }
+            </div>
+            <div class="navbar-collapse collapse bg-3">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    @if (!User.IsInRole("Admin"))
+                    {       @*don't show these links to admin user*@
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Calories", "Understand", "Home")</li>
+                        <li>@Html.ActionLink("Podcasts", "Sounds", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    <footer class="container-fluid text-center">
+        <hr />
+        <div class="col-sm-4">@Html.ActionLink("Developer Info", "Developer")</div>
+        <div class="col-sm-4">Calorie Counts &copy @DateTime.Now.Year</div>
+        <div class="col-sm-4">@Html.ActionLink("Contact Us", "Contact")</div>
+
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
