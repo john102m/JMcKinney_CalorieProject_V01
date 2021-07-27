@@ -10,6 +10,8 @@ namespace CalorieProject_V01
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

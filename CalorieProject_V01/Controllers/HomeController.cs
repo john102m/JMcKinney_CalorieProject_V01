@@ -63,7 +63,7 @@ namespace CalorieProject_V01.Controllers
 
         public ActionResult Index()
         {
-         
+
             // do a reload of all the food items  
             var foodItems = context.FoodItems.ToList();
             foreach(var item in foodItems)
@@ -72,6 +72,31 @@ namespace CalorieProject_V01.Controllers
             }
             //get all the categories from the db context
             var categories = context.Categories.ToList();
+
+            string User_name = string.Empty;
+            string User_color = string.Empty;
+
+
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                //get cookie 
+                User_name = reqCookies["UserName"].ToString();
+                User_color = reqCookies["UserColor"].ToString();
+            }
+            else
+            {
+                //create a cookie
+                HttpCookie userInfo = new HttpCookie("userInfo");
+                userInfo.Secure = true;
+                userInfo["UserName"] = "Test User";
+                userInfo["UserColor"] = "Black";
+                userInfo.Expires.Add(new TimeSpan(0, 1, 0));
+                Response.Cookies.Add(userInfo);
+
+            }
+
+
             return View(categories);
         }
 
