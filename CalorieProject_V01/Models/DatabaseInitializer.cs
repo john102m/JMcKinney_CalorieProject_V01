@@ -58,7 +58,7 @@ namespace CalorieProject_V01.Models
 
 
                 //seed the categories table
-                //create a few catogories
+                //create a   few catogories
                 var cat1 = new Category() { Name = "Fruit", ImgFilePath = "fruit.png" };
                 var cat2 = new Category() { Name = "Cereal", ImgFilePath = "cereal.png" };
                 var cat3 = new Category() { Name = "Meat", ImgFilePath = "meat.png" };
